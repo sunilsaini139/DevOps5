@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         // This tells Jenkins to use the Maven installed on the machine
-        maven 'Maven' 
+        maven 'MAVEN_HOME' 
     }
 
     stages {
