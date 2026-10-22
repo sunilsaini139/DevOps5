@@ -59,7 +59,7 @@ pipeline {
 						    usernameVariable: 'DOCKER_HUB_USER',
 						    passwordVariable: 'DOCKER_HUB_PASS')]){
 		sh """
- 			echo "${DOCKER_HUB_PASS}" | docker login -u "${DOCKER_HUB_USER}" --password-sdtin
+ 			echo "${DOCKER_HUB_PASS}" | docker login -u "${DOCKER_HUB_USER}" --password-stdin
 			docker push ${REPO_NAME}/${IMAGE_NAME}:${IMAGE_TAG}
 			docker push ${REPO_NAME}/${IMAGE_NAME}:latest
 			docker logout
