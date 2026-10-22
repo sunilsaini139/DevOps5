@@ -37,7 +37,7 @@ pipeline {
 	stage ('copy the war File') {
 	    steps{
 		withCredentials ([ sshUserPrivateKey (
-					CredentialsId: 'dockeradmin-ec2-ssh-key',
+					credentialsId: 'dockeradmin-ec2-ssh-key',
 					usernameVariable: 'SSH_USER',
 					keyFileVariable: 'SSH_KEY'
 					)
