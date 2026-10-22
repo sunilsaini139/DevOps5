@@ -57,7 +57,7 @@ pipeline {
 	   steps{
 		withCredentials([ usernamePassword ( credentialsId: 'dockerhub-credentials',
 						    usernameVariable: 'DOCKER_HUB_NAME',
-						    passwordVaraible: 'DOCKER_HUB_PASS')]){
+						    passwordVariable: 'DOCKER_HUB_PASS')]){
 		sh """
  			echo "${DOCKER_HUB_PASS}" | docker login -u "${DOCKER_HUB_USER}" --password-sdtin
 			docker push ${REPO_NAME}/${IMAGE_NAME}:${IMAGE_TAG}
