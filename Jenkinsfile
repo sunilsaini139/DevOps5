@@ -7,9 +7,18 @@ pipeline {
     }
 
     stages {
+	// Clean the exiting workspace nefore next build
+	stage('Clean Workspace') {
+	    steps{
+		cleanWs()
+		}
+	}
+
+	// Pull the code from github repository
         stage('Checkout Code') {
             steps {
                 // Pulls code from your GitHub repo
+		// git url: "https://github.com/sunilsaini139/DevOps5.git"
                 checkout scm
             }
         }
