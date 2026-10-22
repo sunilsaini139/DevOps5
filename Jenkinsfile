@@ -4,7 +4,8 @@ pipeline {
     tools {
         // This tells Jenkins to use the Maven installed on the machine
         maven 'MAVEN_HOME' 
-    }
+	git 'GIT_HOME'
+   }
 
     stages {
 	// Clean the exiting workspace nefore next build
