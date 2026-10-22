@@ -46,7 +46,7 @@ pipeline {
 			sh """
 			   docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
 			   docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${REPO_NAME}/${IMAGE_NAME}:${IMAGE_TAG}
-			   docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${REPO_NAME}/${IMAGE_NAME}: latest
+			   docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${REPO_NAME}/${IMAGE_NAME}:latest
 		          """	
 		  }
 	 	}
