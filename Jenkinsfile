@@ -10,6 +10,7 @@ pipeline {
    environment {
 	IMAGE_NAME = "${JOB_NAME}"
 	IMAGE_TAG = "${BUILD_ID}"
+        REPO_NAME = "sunilssaini139"
   }
 
     stages {
@@ -42,7 +43,11 @@ pipeline {
 	   steps {
 		dir ('hello-world') {
 		   script {
-			sh ' docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'	
+			sh """
+			   docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+			   docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${REPO_NAME}/${IMAGE_NAME}:${IMAGE_TAG}
+			   docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${REPO_NAME}/${IMAGE_NAME}: latest
+		          """	
 		  }
 	 	}
 	     }
