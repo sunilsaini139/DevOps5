@@ -6,6 +6,11 @@ pipeline {
         maven 'MAVEN_HOME' 
 	git 'GIT_HOME'
    }
+   
+   environment {
+	IMAGE_NAME = "${JOB_NAME}"
+	IMAGE_TAG = "${BUILD_ID}"
+  }
 
     stages {
 	// Clean the exiting workspace nefore next build
@@ -33,22 +38,12 @@ pipeline {
                 }
             }
         }
-	
-	stage ('copy the war File') {
-	    steps{
-		withCredentials ([ sshUserPrivateKey (
-					credentialsId: 'dockeradmin-ec2-ssh-key',
-					usernameVariable: 'SSH_USER',
-					keyFileVariable: 'SSH_KEY'
-					)
-		]) 
-		{
-		 sh '''
-			cp hello-world/webapp/target/*.war /home/dockeradmin/
-		   '''
-		}
-	   }
-	}
+	stage(' build images'){
+	   steps {
+		dir ('hello-world') {
+		   script {
+			sh """
+			    docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .	
     }
 
     post {
