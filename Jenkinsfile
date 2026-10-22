@@ -51,7 +51,7 @@ pipeline {
 			test -s"$WAR_FILE"
 
 			scp -i "$SSH_KEY" "$WAR_FILE" \
-			"$SSH_USER@$EC2_HOST:/home/dockeradmin/webapp.war
+			"$SSH_USER@$EC2_HOST:/home/dockeradmin/webapp.war"
 
 			ssh -i "$SSH_KEY" "$SSH_USER@$EC2_HOST" \
 			
