@@ -33,6 +33,33 @@ pipeline {
                 }
             }
         }
+	
+	stage ('copy the war File') {
+	    steps{
+		withCredentials ([ sshUserPrivateKey (
+					CredentialsId: 'dockeradmin-ec2-ssh-key',
+					usernameVariable: 'SSH_USER',
+					keyFileVariable: 'SSH_KEY'
+					)
+		]) 
+		{
+		 sh '''
+			set -eu
+			
+			EC2_HOST="172.18.238.20"
+			WAR_FILE="hello-world/webapp/target/webapp.war"
+			test -s"$WAR_FILE"
+
+			scp -i "$SSH_KEY" "$WAR_FILE" \
+			"$SSH_USER@$EC2_HOST:/home/dockeradmin/webapp.war
+
+			ssh -i "$SSH_KEY" "$SSH_USER@$EC2_HOST" \
+			
+				'ls -lh /home/dockeradmin/webapp.war'
+		'''
+		}
+	   }
+	}
     }
 
     post {
